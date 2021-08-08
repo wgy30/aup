@@ -27,7 +27,7 @@
         </jdbcConnection>
 
         <!--生成实体类的位置-->
-        <javaModelGenerator targetPackage="com.wgy.aup.dto" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.wgy.aup.model.dto" targetProject="src/main/java">
             <!-- 是否让schema作为包的后缀，默认为false -->
             <!--<property name="enableSubPackages" value="false"/>-->
             <!-- 是否针对string类型的字段在set方法中进行修剪，默认false -->
@@ -40,7 +40,7 @@
         </sqlMapGenerator>
 
         <!--生成xxxMapper.java接口-->
-        <javaClientGenerator targetPackage="com.wgy.aup.dao" targetProject="src/main/java" type="XMLMAPPER">
+        <javaClientGenerator targetPackage="com.wgy.aup.model.dao" targetProject="src/main/java" type="XMLMAPPER">
             <!--<property name="enableSubPackages" value="false"/>-->
         </javaClientGenerator>
 

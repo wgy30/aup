@@ -1,6 +1,6 @@
-package com.wgy.aup.dao;
+package com.wgy.aup.model.dao;
 
-import com.wgy.aup.dto.BaseStudent;
+import com.wgy.aup.model.dto.BaseStudent;
 import java.util.List;
 
 public interface BaseStudentMapper {

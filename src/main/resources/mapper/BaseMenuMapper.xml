@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wgy.aup.dao.BaseMenuMapper">
-  <resultMap id="BaseResultMap" type="com.wgy.aup.dto.BaseMenu">
+<mapper namespace="com.wgy.aup.model.dao.BaseMenuMapper">
+  <resultMap id="BaseResultMap" type="com.wgy.aup.model.dto.BaseMenu">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="code" jdbcType="BIGINT" property="code" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -17,7 +17,7 @@
     delete from base_menu
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.wgy.aup.dto.BaseMenu">
+  <insert id="insert" parameterType="com.wgy.aup.model.dto.BaseMenu">
     insert into base_menu (id, code, name, 
       parent_id, node_type, icon_url, 
       level, is_deleted, sort, 
@@ -27,7 +27,7 @@
       #{level,jdbcType=INTEGER}, #{isDeleted,jdbcType=BIT}, #{sort,jdbcType=INTEGER}, 
       #{linkUrl,jdbcType=VARCHAR})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.wgy.aup.dto.BaseMenu">
+  <update id="updateByPrimaryKey" parameterType="com.wgy.aup.model.dto.BaseMenu">
     update base_menu
     set code = #{code,jdbcType=BIGINT},
       name = #{name,jdbcType=VARCHAR},

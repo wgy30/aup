@@ -1,4 +1,4 @@
-package com.wgy.aup.dto;
+package com.wgy.aup.model.dto;
 
 import lombok.Data;
 

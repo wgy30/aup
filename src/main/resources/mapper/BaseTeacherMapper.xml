@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wgy.aup.dao.BaseTeacherMapper">
-  <resultMap id="BaseResultMap" type="com.wgy.aup.dto.BaseTeacher">
+<mapper namespace="com.wgy.aup.model.dao.BaseTeacherMapper">
+  <resultMap id="BaseResultMap" type="com.wgy.aup.model.dto.BaseTeacher">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="teacher_code" jdbcType="BIGINT" property="teacherCode" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -24,7 +24,7 @@
     delete from base_teacher
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.wgy.aup.dto.BaseTeacher">
+  <insert id="insert" parameterType="com.wgy.aup.model.dto.BaseTeacher">
     insert into base_teacher (id, teacher_code, name, 
       password, age, address, 
       email, phone, number, 
@@ -38,7 +38,7 @@
       #{isDeleted,jdbcType=BIT}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
       #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.wgy.aup.dto.BaseTeacher">
+  <update id="updateByPrimaryKey" parameterType="com.wgy.aup.model.dto.BaseTeacher">
     update base_teacher
     set teacher_code = #{teacherCode,jdbcType=BIGINT},
       name = #{name,jdbcType=VARCHAR},

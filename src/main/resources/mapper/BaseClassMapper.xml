@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wgy.aup.dao.BaseClassMapper">
-  <resultMap id="BaseResultMap" type="com.wgy.aup.dto.BaseClass">
+<mapper namespace="com.wgy.aup.model.dao.BaseClassMapper">
+  <resultMap id="BaseResultMap" type="com.wgy.aup.model.dto.BaseClass">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="class_code" jdbcType="BIGINT" property="classCode" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -14,7 +14,7 @@
     delete from base_class
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.wgy.aup.dto.BaseClass">
+  <insert id="insert" parameterType="com.wgy.aup.model.dto.BaseClass">
     insert into base_class (id, class_code, name, 
       is_deleted, enable_state, create_time, 
       update_time)
@@ -22,7 +22,7 @@
       #{isDeleted,jdbcType=BIT}, #{enableState,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.wgy.aup.dto.BaseClass">
+  <update id="updateByPrimaryKey" parameterType="com.wgy.aup.model.dto.BaseClass">
     update base_class
     set class_code = #{classCode,jdbcType=BIGINT},
       name = #{name,jdbcType=VARCHAR},

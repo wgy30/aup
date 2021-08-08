@@ -1,6 +1,6 @@
-package com.wgy.aup.dao;
+package com.wgy.aup.model.dao;
 
-import com.wgy.aup.dto.BaseClass;
+import com.wgy.aup.model.dto.BaseClass;
 import java.util.List;
 
 public interface BaseClassMapper {

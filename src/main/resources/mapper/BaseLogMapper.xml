@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wgy.aup.dao.BaseLogMapper">
-  <resultMap id="BaseResultMap" type="com.wgy.aup.dto.BaseLog">
+<mapper namespace="com.wgy.aup.model.dao.BaseLogMapper">
+  <resultMap id="BaseResultMap" type="com.wgy.aup.model.dto.BaseLog">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="log_code" jdbcType="BIGINT" property="logCode" />
     <result column="log_context" jdbcType="VARCHAR" property="logContext" />
@@ -14,7 +14,7 @@
     delete from base_log
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.wgy.aup.dto.BaseLog">
+  <insert id="insert" parameterType="com.wgy.aup.model.dto.BaseLog">
     insert into base_log (id, log_code, log_context, 
       name, create_time, is_deleted, 
       update_time)
@@ -22,7 +22,7 @@
       #{name,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=BIT}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.wgy.aup.dto.BaseLog">
+  <update id="updateByPrimaryKey" parameterType="com.wgy.aup.model.dto.BaseLog">
     update base_log
     set log_code = #{logCode,jdbcType=BIGINT},
       log_context = #{logContext,jdbcType=VARCHAR},
