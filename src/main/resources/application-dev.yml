@@ -1,0 +1,14 @@
+server:
+  port: 19205
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/edu-sys?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 123456
+
+# mybatis配置
+mybatis:
+  type-aliases-package: com.wgy.aup.dto
+  mapper-locations: classpath:mapper/*

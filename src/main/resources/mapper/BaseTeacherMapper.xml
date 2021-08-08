@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wgy.aup.dao.BaseTeacherMapper">
+  <resultMap id="BaseResultMap" type="com.wgy.aup.dto.BaseTeacher">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="teacher_code" jdbcType="BIGINT" property="teacherCode" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="img_file" jdbcType="VARCHAR" property="imgFile" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="profession" jdbcType="VARCHAR" property="profession" />
+    <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from base_teacher
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.wgy.aup.dto.BaseTeacher">
+    insert into base_teacher (id, teacher_code, name, 
+      password, age, address, 
+      email, phone, number, 
+      img_file, status, profession, 
+      is_deleted, create_by, create_time, 
+      update_by, update_time)
+    values (#{id,jdbcType=BIGINT}, #{teacherCode,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, 
+      #{imgFile,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, #{profession,jdbcType=VARCHAR}, 
+      #{isDeleted,jdbcType=BIT}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
+      #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.wgy.aup.dto.BaseTeacher">
+    update base_teacher
+    set teacher_code = #{teacherCode,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      number = #{number,jdbcType=VARCHAR},
+      img_file = #{imgFile,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      profession = #{profession,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=BIT},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=DATE},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, teacher_code, name, password, age, address, email, phone, number, img_file, 
+    status, profession, is_deleted, create_by, create_time, update_by, update_time
+    from base_teacher
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, teacher_code, name, password, age, address, email, phone, number, img_file, 
+    status, profession, is_deleted, create_by, create_time, update_by, update_time
+    from base_teacher
+  </select>
+</mapper>
