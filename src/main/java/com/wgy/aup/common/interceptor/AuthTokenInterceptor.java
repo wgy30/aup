@@ -1,6 +1,6 @@
 package com.wgy.aup.common.interceptor;
 
-import com.wgy.aup.CheckUserToken;
+import com.wgy.aup.common.annotation.CheckUserToken;
 import com.wgy.aup.common.annotation.UserTokenIgnore;
 import com.wgy.aup.common.core.BaseContextHandler;
 import org.springframework.web.method.HandlerMethod;

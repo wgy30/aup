@@ -1,4 +1,4 @@
-package com.wgy.aup;
+package com.wgy.aup.common.annotation;
 
 
 import java.lang.annotation.ElementType;
