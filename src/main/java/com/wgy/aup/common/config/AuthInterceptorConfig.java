@@ -28,11 +28,7 @@ public class AuthInterceptorConfig implements WebMvcConfigurer {
         List<String> list = new ArrayList<>();
         list.add("/login");
         list.add("/register");
-        list.add("/login.html");
-        list.add("*.css");
-        list.add("*js");
-        list.add("*.png");
-        list.add("*.jpeg");
+        list.add("/static/**");
         return list;
     }
 
