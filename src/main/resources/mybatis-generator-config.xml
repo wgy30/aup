@@ -40,7 +40,7 @@
         </sqlMapGenerator>
 
         <!--生成xxxMapper.java接口-->
-        <javaClientGenerator targetPackage="com.wgy.aup.model.dao" targetProject="src/main/java" type="XMLMAPPER">
+        <javaClientGenerator targetPackage="com.wgy.aup.mapper" targetProject="src/main/java" type="XMLMAPPER">
             <!--<property name="enableSubPackages" value="false"/>-->
         </javaClientGenerator>
 

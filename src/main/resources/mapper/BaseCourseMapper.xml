@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wgy.aup.model.dao.BaseCourseMapper">
+<mapper namespace="com.wgy.aup.mapper.BaseCourseMapper">
   <resultMap id="BaseResultMap" type="com.wgy.aup.model.dto.BaseCourse">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="course_code" jdbcType="BIGINT" property="courseCode" />

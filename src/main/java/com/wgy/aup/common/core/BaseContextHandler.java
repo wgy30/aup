@@ -1,6 +1,6 @@
-package com.wgy.aup.core;
+package com.wgy.aup.common.core;
 
-import com.wgy.aup.core.context.Constants;
+import com.wgy.aup.common.core.context.Constants;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,6 +31,7 @@ public class BaseContextHandler {
         return map.get(key);
     }
 
+
     public static void setCurrentName(String name){
         set(Constants.KEY_CURRENT_NAME,name);
     }
@@ -45,16 +46,23 @@ public class BaseContextHandler {
     }
 
     public static void setToken(String token){
-        set(Constants.KEY_CURRENT_TOKEN,token);
+        set(Constants.KEY_TOKEN_PREFIX,token);
     }
 
+    /**
+     * 获取当前编码
+     */
     public static Object getCurrentCode(){
         Object value = get(Constants.KEY_CURRENT_CODE);
         return returnObjectValue(value);
     }
 
+    /**
+     * 获取当前token
+     * @return
+     */
     public static Object getToken(){
-        Object value = get(Constants.KEY_CURRENT_TOKEN);
+        Object value = get(Constants.KEY_TOKEN_PREFIX);
         return returnObjectValue(value);
     }
 

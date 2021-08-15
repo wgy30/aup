@@ -1,6 +1,4 @@
-package com.wgy.aup.core.context;
-
-import com.wgy.aup.core.BaseContextHandler;
+package com.wgy.aup.common.core.context;
 
 /**
  * description 标志类
@@ -14,5 +12,8 @@ public class Constants {
 
     public static final String KEY_CURRENT_TYPE = "type";
 
-    public static final String KEY_CURRENT_TOKEN = "token";
+    public static final String KEY_TOKEN_NAME = "token";
+    public static final String KEY_TOKEN_PREFIX = "Bearer ";
+    public static final String KEY_TOKEN_HEADER = "Authorization";
+
 }

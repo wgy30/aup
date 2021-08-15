@@ -1,4 +1,4 @@
-package com.wgy.aup.model.dao;
+package com.wgy.aup.mapper;
 
 import com.wgy.aup.model.dto.BaseCourse;
 import java.util.List;
