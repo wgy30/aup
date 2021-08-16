@@ -86,4 +86,8 @@ public class BaseContextHandler {
     private static Object returnObjectValue(Object value) {
         return value == null? null:value.toString();
     }
+
+    public static void remove(){
+        threadLocal.remove();
+    }
 }

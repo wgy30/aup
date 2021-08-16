@@ -6,6 +6,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.wgy.aup.common.core.context.Constants;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
@@ -49,8 +50,7 @@ public class JwtTokenUtils {
             builder.withClaim(KEY_CURRENT_CODE, code);
             builder.withClaim(KEY_CURRENT_NAME, name);
             builder.withClaim(KEY_CURRENT_NUMBER, number);//当前时间
-            token = builder
-                    .sign(Algorithm.HMAC256(TOKEN_SECRET));
+            token = builder.sign(Algorithm.HMAC256(TOKEN_SECRET));
         } catch (Exception e) {
             log.info("token.error.message：{}", e.getMessage());
             throw new RuntimeException("Token generation failure");
@@ -93,6 +93,24 @@ public class JwtTokenUtils {
         } catch (Exception e) {
             throw new RuntimeException("verify token failed");
         }
+    }
 
+    /**
+     * 刷新token
+     * @param token
+     * @return
+     */
+    public static String refresh(String token) {
+        try {
+            //拿到token中的信息
+            Map<String, Claim> map = parseToken(token);
+            String code = map.get(KEY_CURRENT_CODE).asString();
+            String name = map.get(KEY_CURRENT_NAME).asString();
+            String number = map.get(KEY_CURRENT_NUMBER).asString();
+            return createToken(code, name, number);
+        }catch (Exception e){
+            log.info("token刷新数百");
+            throw new RuntimeException("token don't refresh");
+        }
     }
 }
