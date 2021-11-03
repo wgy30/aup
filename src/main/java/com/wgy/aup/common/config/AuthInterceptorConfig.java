@@ -25,9 +25,9 @@ public class AuthInterceptorConfig implements WebMvcConfigurer {
 
     public List<String> excludePath() {
         List<String> list = new ArrayList<>();
-        list.add("**/login");
-        list.add("/register");
-        list.add("/static/**");
+//        list.add("**/login");
+//        list.add("/register");
+//        list.add("/static/**");
         return list;
     }
 
