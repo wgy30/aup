@@ -2,10 +2,6 @@ package com.wgy.aup.common.utils;
 
 import lombok.Data;
 
-/**
- * @author wgy
- * @version 2021/8/21 21:02:29
- */
 @Data
 public class ObjectResponse<T> extends BaseResponse {
 
@@ -14,37 +10,25 @@ public class ObjectResponse<T> extends BaseResponse {
     public ObjectResponse() {
     }
 
-    public ObjectResponse(ResultCode resultCode) {
-        super(resultCode);
-        this.message = getMessage();
-        this.code = getCode();
-    }
-
-
-    public ObjectResponse(T data) {
-        super(ResultCode.SUCCESS);
+    public ObjectResponse(T data){
         this.data = data;
     }
 
     public ObjectResponse<T> ok() {
-        ObjectResponse<T> response = new ObjectResponse<>(ResultCode.SUCCESS);
-        return response;
+        return new ObjectResponse<>();
     }
 
-    public ObjectResponse<T> ok(T data) {
-        ObjectResponse<T> response = new ObjectResponse<T>(ResultCode.SUCCESS);
+    public ObjectResponse<T> data(T data) {
+        ObjectResponse<T> response = new ObjectResponse<>();
         response.setData(data);
         return response;
     }
 
-    public ObjectResponse<T> fail() {
-        ObjectResponse<T> response = new ObjectResponse<>(ResultCode.FAIL);
-        return response;
-    }
-
-    public ObjectResponse<T> fail(T data) {
-        ObjectResponse<T> response = new ObjectResponse<>(ResultCode.FAIL);
-        return response;
+    public ObjectResponse<T> fail(Integer code,String message) {
+        ObjectResponse<T> response = new ObjectResponse<>();
+        response.setCode(code);
+        response.setMessage(message);
+        return this;
     }
 }
 

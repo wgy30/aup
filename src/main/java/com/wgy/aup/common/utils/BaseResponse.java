@@ -1,6 +1,7 @@
 package com.wgy.aup.common.utils;
 
 import com.wgy.aup.common.utils.ResultCode;
+import io.swagger.models.auth.In;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -20,14 +21,18 @@ public class BaseResponse implements Serializable {
     /**
      * 状态码
      */
-    public String code;
+    public Integer code = 200;
 
     public BaseResponse() {
     }
 
-    public BaseResponse(ResultCode resultCode) {
-        this.message = resultCode.getMessage();
-        this.code = resultCode.getCode();
+    public BaseResponse(String message){
+        this.message = message;
+    }
+
+    public BaseResponse(String message, Integer code) {
+        this.message = message;
+        this.code = code;
     }
 
 }
