@@ -13,7 +13,7 @@ public class Constants {
 
     public static final String KEY_TOKEN_NAME = "token";
     public static final String KEY_TOKEN_PREFIX = "Bearer ";
-    public static final String KEY_TOKEN_HEADER = "Authorization";
+    public static final String KEY_TOKEN_HEADER = "authorization";
 
     public static final String TOKEN_SECRET = "jdHDlejJkepasd!|sd|Asd1-";
 

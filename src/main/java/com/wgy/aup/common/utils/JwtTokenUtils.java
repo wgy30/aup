@@ -17,9 +17,8 @@ import static com.wgy.aup.common.core.context.Constants.*;
 
 
 /**
- * description token工具类
- * author wgy
- * version 2021/8/13 03:10:14
+ * @author wgy
+ * @version 2021/8/13 03:10:14
  */
 @Slf4j
 public class JwtTokenUtils {
@@ -40,7 +39,7 @@ public class JwtTokenUtils {
     public static String createToken(String code, String name, String number) {
         Date expire_time = DateUtils.getAddParamTime(EXPIRE_TIME);
         Map<String, Object> header = new HashMap<>();
-        header.put("type", "jwt");
+        header.put("HMAC256", "JWT");
         String token = "";
         try {
             JWTCreator.Builder builder = JWT.create();

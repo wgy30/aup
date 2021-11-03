@@ -26,13 +26,12 @@ import java.util.Map;
  * author wgy
  * version 2021/8/13 02:31:44
  */
-@Slf4j
 @Component
 public class AuthTokenInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String token = request.getHeader("authorization");
+        String token = request.getHeader(Constants.KEY_TOKEN_HEADER);
         //若不是映射到方法，直接通过
         if (!(handler instanceof HandlerMethod)) {
             return true;
@@ -52,7 +51,6 @@ public class AuthTokenInterceptor implements HandlerInterceptor {
             CheckUserToken checkUserToken = method.getAnnotation(CheckUserToken.class);
             if (checkUserToken.required()){
                 if (token == null){
-                    log.info("token为空");
                     throw new RuntimeException("User token is null");
                 }
                 response.setHeader("authorization",Constants.KEY_TOKEN_PREFIX + token);
@@ -63,7 +61,6 @@ public class AuthTokenInterceptor implements HandlerInterceptor {
                 BaseContextHandler.setCurrentNumber(map.get(Constants.KEY_CURRENT_NUMBER).asString());
                 return true;
             }else {
-                log.info("token无效");
                 throw new RuntimeException("token is not valid");
             }
         }
