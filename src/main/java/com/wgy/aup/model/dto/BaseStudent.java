@@ -22,8 +22,6 @@ public class BaseStudent {
 
     private String phone;
 
-    private String password;
-
     private String imgFile;
 
     private Boolean status;

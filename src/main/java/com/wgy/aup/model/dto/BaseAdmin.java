@@ -20,8 +20,6 @@ public class BaseAdmin {
 
     private String number;
 
-    private String password;
-
     private String imgFile;
 
     private Boolean status;

@@ -1,72 +1,181 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wgy.aup.mapper.BaseStudentMapper">
-  <resultMap id="BaseResultMap" type="com.wgy.aup.model.dto.BaseStudent">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="student_code" jdbcType="BIGINT" property="studentCode" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="number" jdbcType="VARCHAR" property="number" />
-    <result column="age" jdbcType="INTEGER" property="age" />
-    <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="img_file" jdbcType="VARCHAR" property="imgFile" />
-    <result column="status" jdbcType="BIT" property="status" />
-    <result column="state" jdbcType="BIT" property="state" />
-    <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
-    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-  </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from base_student
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="com.wgy.aup.model.dto.BaseStudent">
-    insert into base_student (id, student_code, name, 
-      email, number, age, 
-      address, phone, password, 
-      img_file, status, state, is_deleted, 
-      create_by, create_time, update_by, 
-      update_time)
-    values (#{id,jdbcType=BIGINT}, #{studentCode,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
-      #{address,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{imgFile,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, #{state,jdbcType=BIT}, #{isDeleted,jdbcType=BIT}, 
-      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP})
-  </insert>
-  <update id="updateByPrimaryKey" parameterType="com.wgy.aup.model.dto.BaseStudent">
-    update base_student
-    set student_code = #{studentCode,jdbcType=BIGINT},
-      name = #{name,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      number = #{number,jdbcType=VARCHAR},
-      age = #{age,jdbcType=INTEGER},
-      address = #{address,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      img_file = #{imgFile,jdbcType=VARCHAR},
-      status = #{status,jdbcType=BIT},
-      state = #{state,jdbcType=BIT},
-      is_deleted = #{isDeleted,jdbcType=BIT},
-      create_by = #{createBy,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_by = #{updateBy,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select id, student_code, name, email, number, age, address, phone, password, img_file, 
-    status, state, is_deleted, create_by, create_time, update_by, update_time
-    from base_student
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select id, student_code, name, email, number, age, address, phone, password, img_file, 
-    status, state, is_deleted, create_by, create_time, update_by, update_time
-    from base_student
-  </select>
+    <resultMap id="BaseResultMap" type="com.wgy.aup.model.dto.BaseStudent">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="student_code" jdbcType="BIGINT" property="studentCode"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="number" jdbcType="VARCHAR" property="number"/>
+        <result column="age" jdbcType="INTEGER" property="age"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="img_file" jdbcType="VARCHAR" property="imgFile"/>
+        <result column="status" jdbcType="BIT" property="status"/>
+        <result column="state" jdbcType="BIT" property="state"/>
+        <result column="is_deleted" jdbcType="BIT" property="isDeleted"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from base_student
+        where id = #{id,jdbcType=BIGINT}
+          and is_deleted = 0
+    </delete>
+    <insert id="insert" parameterType="com.wgy.aup.model.dto.BaseStudent">
+        insert into base_student
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="studentCode != null ">
+                student_code,
+            </if>
+            <if test="number != null ">
+                `number`,
+            </if>
+            <if test="address != null ">
+                address,
+            </if>
+            <if test="name != null ">
+                `name`,
+            </if>
+            <if test="phone != null ">
+                phone,
+            </if>
+            <if test="imgFile != null ">
+                img_file,
+            </if>
+            <if test="email != null ">
+                email,
+            </if>
+            <if test="status != null ">
+                status,
+            </if>
+            <if test="state != null ">
+                `state`,
+            </if>
+            <if test="isDeleted != null ">
+                is_deleted,
+            </if>
+            <if test="age != null ">
+                age,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="studentCode != null ">
+                #{studentCode},
+            </if>
+            <if test="number != null ">
+                #{number},
+            </if>
+            <if test="address != null ">
+                #{address},
+            </if>
+            <if test="name != null ">
+                #{name},
+            </if>
+            <if test="phone != null ">
+                #{phone},
+            </if>
+            <if test="imgFile != null ">
+                #{imgFile},
+            </if>
+            <if test="email != null ">
+                #{email},
+            </if>
+            <if test="status != null ">
+                #{status},
+            </if>
+            <if test="state != null ">
+                #{state},
+            </if>
+            <if test="isDeleted != null ">
+                #{isDeleted},
+            </if>
+            <if test="age != null ">
+                #{age},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.wgy.aup.model.dto.BaseStudent">
+        update base_student
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="studentCode != null ">
+                student_code = #{studentCode},
+            </if>
+            <if test="number != null ">
+                `number` = #{number},
+            </if>
+            <if test="address != null ">
+                address = #{address},
+            </if>
+            <if test="name != null ">
+                `name` = #{name},
+            </if>
+            <if test="phone != null ">
+                phone = #{phone},
+            </if>
+            <if test="imgFile != null ">
+                img_file = #{imgFile},
+            </if>
+            <if test="email != null ">
+                email = #{email},
+            </if>
+            <if test="status != null ">
+                status = #{status},
+            </if>
+            <if test="state != null ">
+                `state` = #{state},
+            </if>
+            <if test="isDeleted != null ">
+                is_deleted = #{isDeleted},
+            </if>
+            <if test="age != null ">
+                age = #{age},
+            </if>
+        </trim>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select id,
+               student_code,
+               name,
+               email,
+               number,
+               age,
+               address,
+               phone,
+               password,
+               img_file,
+               status,
+               state,
+               is_deleted,
+               create_by,
+               create_time,
+               update_by,
+               update_time
+        from base_student
+        where id = #{id,jdbcType=BIGINT} and id_deleted = 0
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id,
+               student_code,
+               name,
+               email,
+               number,
+               age,
+               address,
+               phone,
+               password,
+               img_file,
+               status,
+               state,
+               is_deleted,
+               create_by,
+               create_time,
+               update_by,
+               update_time
+        from base_student where is_deleted = 0
+    </select>
 </mapper>

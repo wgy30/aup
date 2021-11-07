@@ -1,50 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wgy.aup.mapper.BaseGradeMapper">
-  <resultMap id="BaseResultMap" type="com.wgy.aup.model.dto.BaseGrade">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="grade_code" jdbcType="BIGINT" property="gradeCode" />
-    <result column="student_code" jdbcType="BIGINT" property="studentCode" />
-    <result column="grade_value" jdbcType="REAL" property="gradeValue" />
-    <result column="record_time" jdbcType="TIMESTAMP" property="recordTime" />
-    <result column="course_code" jdbcType="BIGINT" property="courseCode" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="com.wgy.aup.model.dto.BaseGrade">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="grade_code" jdbcType="BIGINT" property="gradeCode"/>
+        <result column="student_code" jdbcType="BIGINT" property="studentCode"/>
+        <result column="grade_value" jdbcType="REAL" property="gradeValue"/>
+        <result column="record_time" jdbcType="TIMESTAMP" property="recordTime"/>
+        <result column="course_code" jdbcType="BIGINT" property="courseCode"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from base_grade
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from base_grade
+        where id = #{id,jdbcType=BIGINT}
+          and is_deleted = 0
+    </delete>
 
-  <insert id="insert" parameterType="com.wgy.aup.model.dto.BaseGrade">
-    insert into base_grade (id, grade_code, student_code, 
-      grade_value, record_time, course_code, 
-      update_time)
-    values (#{id,jdbcType=BIGINT}, #{gradeCode,jdbcType=BIGINT}, #{studentCode,jdbcType=BIGINT}, 
-      #{gradeValue,jdbcType=REAL}, #{recordTime,jdbcType=TIMESTAMP}, #{courseCode,jdbcType=BIGINT}, 
-      #{updateTime,jdbcType=TIMESTAMP})
-  </insert>
+    <insert id="insert" parameterType="com.wgy.aup.model.dto.BaseGrade">
+        insert into base_grade
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            <if test="gradeCode != null">
+                grade_code,
+            </if>
+            <if test="studentCode != null">
+                student_code,
+            </if>
+            <if test="gradeValue != null">
+                grade_vode,
+            </if>
+            <if test="recordTime != null">
+                record_time,
+            </if>
+            <if test="courseCode != null">
+                course_code,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffixOverrides="," suffix=")">
+            <if test="gradeCode != null">
+                #{gradeCode},
+            </if>
+            <if test="studentCode != null">
+                #{studentCode},
+            </if>
+            <if test="gradeValue != null">
+                #{gradeValue},
+            </if>
+            <if test="recordTime != null">
+                #{recordTime},
+            </if>
+            <if test="courseCode != null">
+                #{courseCode},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
+        </trim>
+    </insert>
 
-  <update id="updateByPrimaryKey" parameterType="com.wgy.aup.model.dto.BaseGrade">
-    update base_grade
-    set grade_code = #{gradeCode,jdbcType=BIGINT},
-      student_code = #{studentCode,jdbcType=BIGINT},
-      grade_value = #{gradeValue,jdbcType=REAL},
-      record_time = #{recordTime,jdbcType=TIMESTAMP},
-      course_code = #{courseCode,jdbcType=BIGINT},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+    <update id="updateByPrimaryKey" parameterType="com.wgy.aup.model.dto.BaseGrade">
+        update base_grade
+      <trim prefix="set " suffixOverrides=",">
+        <if test="gradeCode != null">
+          grade_code = #{gradeCode},
+        </if>
+        <if test="studentCode != null">
+          studnet_code = #{studentCode},
+        </if>
+        <if test="gradeValue != null">
+          grade_value = #{gradeValue},
+        </if>
+        <if test="recordTime != null">
+          record_time = #{recordTime},
+        </if>
+        <if test="courseCode != null">
+          course_code = #{courseCode},
+        </if>
+        <if test="updateTime != null">
+          update_time = #{updateTime},
+        </if>
+      </trim>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select id, grade_code, student_code, grade_value, record_time, course_code, update_time
-    from base_grade
-    where id = #{id,jdbcType=BIGINT}
-  </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select id, grade_code, student_code, grade_value, record_time, course_code, update_time
+        from base_grade
+        where id = #{id,jdbcType=BIGINT} and is_deleted = 0
+    </select>
 
-  <select id="selectAll" resultMap="BaseResultMap">
-    select id, grade_code, student_code, grade_value, record_time, course_code, update_time
-    from base_grade
-  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id, grade_code, student_code, grade_value, record_time, course_code, update_time
+        from base_grade where is_deleted = 0
+    </select>
 
 </mapper>

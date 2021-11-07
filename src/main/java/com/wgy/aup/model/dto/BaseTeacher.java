@@ -12,8 +12,6 @@ public class BaseTeacher {
 
     private String name;
 
-    private String password;
-
     private Integer age;
 
     private String address;

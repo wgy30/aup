@@ -1,36 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wgy.aup.mapper.BaseRoleMapper">
-  <resultMap id="BaseResultMap" type="com.wgy.aup.model.dto.BaseRole">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="role_code" jdbcType="BIGINT" property="roleCode" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
-  </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from base_role
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="com.wgy.aup.model.dto.BaseRole">
-    insert into base_role (id, role_code, name, 
-      is_deleted)
-    values (#{id,jdbcType=BIGINT}, #{roleCode,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
-      #{isDeleted,jdbcType=BIT})
-  </insert>
-  <update id="updateByPrimaryKey" parameterType="com.wgy.aup.model.dto.BaseRole">
-    update base_role
-    set role_code = #{roleCode,jdbcType=BIGINT},
-      name = #{name,jdbcType=VARCHAR},
-      is_deleted = #{isDeleted,jdbcType=BIT}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select id, role_code, name, is_deleted
-    from base_role
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select id, role_code, name, is_deleted
-    from base_role
-  </select>
+    <resultMap id="BaseResultMap" type="com.wgy.aup.model.dto.BaseRole">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="role_code" jdbcType="BIGINT" property="roleCode"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="is_deleted" jdbcType="BIT" property="isDeleted"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from base_role
+        where id = #{id,jdbcType=BIGINT}
+          and is_deleted = 0
+    </delete>
+    <insert id="insert" parameterType="com.wgy.aup.model.dto.BaseRole">
+        insert into base_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleCode != null">
+                role_code,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="roleCode != null">
+                role_code = #{roleCode},
+            </if>
+            <if test="name != null">
+                `name` = #{name},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted}
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.wgy.aup.model.dto.BaseRole">
+        update base_role
+        <trim prefix="set " suffixOverrides=",">
+            <if test="roleCode != null">
+                role_code = #{roleCode},
+            </if>
+            <if test="name != null">
+                `name` = #{name},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted}
+            </if>
+        </trim>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select id, role_code, `name`, is_deleted
+        from base_role
+        where id = #{id,jdbcType=BIGINT} and is_deleted = 0
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id, role_code, name, is_deleted
+        from base_role where is_deleted = 0
+    </select>
 </mapper>
