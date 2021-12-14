@@ -10,7 +10,7 @@ public class ObjectResponse<T> extends BaseResponse {
     public ObjectResponse() {
     }
 
-    public ObjectResponse(T data){
+    public ObjectResponse(T data) {
         this.data = data;
     }
 
@@ -24,10 +24,28 @@ public class ObjectResponse<T> extends BaseResponse {
         return response;
     }
 
-    public ObjectResponse<T> fail(Integer code,String message) {
+    public ObjectResponse<T> data() {
+        this.setCode(200);
+        this.setMessage("success");
+        return this;
+    }
+
+    public ObjectResponse<T> fail(Integer code, String message) {
         ObjectResponse<T> response = new ObjectResponse<>();
         response.setCode(code);
         response.setMessage(message);
+        return this;
+    }
+
+    public ObjectResponse<T> fail(String message) {
+        this.setCode(500);
+        this.setMessage(message);
+        return this;
+    }
+
+    public ObjectResponse<T> fail() {
+        this.setCode(500);
+        this.setMessage("fail");
         return this;
     }
 }

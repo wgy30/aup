@@ -25,7 +25,7 @@ public class AuthInterceptorConfig implements WebMvcConfigurer {
 
     public List<String> excludePath() {
         List<String> list = new ArrayList<>();
-        list.add("**/login");
+        list.add("/auth/token");
         list.add("/register");
         list.add("/static/**");
         return list;
@@ -33,8 +33,8 @@ public class AuthInterceptorConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        //拦截所有接口，除login外
-        registry.addInterceptor(authTokenInterceptor).addPathPatterns("/**");
+        //拦截所有接口0，除login外
+        registry.addInterceptor(authTokenInterceptor).addPathPatterns("/**").excludePathPatterns(excludePath());
     }
 
     @Override

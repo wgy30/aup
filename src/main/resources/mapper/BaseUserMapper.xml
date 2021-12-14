@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wgy.aup.mapper.BaseUserMapper">
+    <resultMap id="BaseResultMap" type="com.wgy.aup.model.dto.BaseUser">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="code" jdbcType="BIGINT" property="code"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="account" jdbcType="VARCHAR" property="account"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="img_file" jdbcType="VARCHAR" property="imgFile"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="type" jdbcType="BIT" property="type"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="is_deleted" jdbcType="BIT" property="isDeleted"/>
+        <result column="create_time" jdbcType="DATE" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="BaseSql">
+        id,code,`name`,account,img_file,phone,address,`type`,email
+    </sql>
+    <insert id="insert" parameterType="com.wgy.aup.model.dto.BaseUser">
+        insert into base_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="account != null">
+                account,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="imgFile != null">
+                img_file,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="type != null">
+                `type`,
+            </if>
+            <if test="email != null">
+                `email`,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="code != null">
+                #{code},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="account != null">
+                #{account},
+            </if>
+            <if test="password != null">
+                #{password},
+            </if>
+            <if test="imgFile != null">
+                #{imgFile},
+            </if>
+            <if test="address != null">
+                #{address},
+            </if>
+            <if test="phone != null">
+                #{phone},
+            </if>
+            <if test="type != null">
+                #{type},
+            </if>
+            <if test="email != null">
+                #{email},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted},
+            </if>
+        </trim>
+    </insert>
+    <update id="delete">
+        update table base_user
+        set is_deleted = 1
+        where id = #{id}
+    </update>
+    <delete id="realDelete">
+        delete from base_user where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <select id="select" resultMap="BaseResultMap">
+        select id,code,`name`,account,password,img_file,phone,address,`type`,email from base_user where account = #{account}
+    </select>
+    <select id="selectByCode" resultMap="BaseResultMap">
+        select <include refid="BaseSql" /> from base_user where code = #{userCode} and is_deleted = 0
+    </select>
+</mapper>

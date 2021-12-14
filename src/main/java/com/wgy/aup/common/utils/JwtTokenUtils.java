@@ -6,7 +6,6 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.wgy.aup.common.core.context.Constants;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
@@ -24,9 +23,8 @@ import static com.wgy.aup.common.core.context.Constants.*;
 public class JwtTokenUtils {
 
 
-    private static final long EXPIRE_TIME = 10 * 60 * 60 * 1000;//token到期时间10小时
+    private static final long EXPIRE_TIME = 30 * 60 * 1000;//token到期时间15小时
     private static final String TOKEN_SECRET = "ADjoKeFire4GarDF237887jASDhjO53";  //密钥盐
-
 
     /**
      * 生成token
@@ -66,6 +64,9 @@ public class JwtTokenUtils {
     public static Map<String, Claim> parseToken(String token) {
         Map<String, Claim> claim;
         try {
+            if (token.contains(KEY_TOKEN_PREFIX)) {
+                token = token.substring(7);
+            }
             Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
             JWTVerifier verifier = JWT.require(algorithm).build();
             DecodedJWT jwt = verifier.verify(token);
@@ -85,6 +86,9 @@ public class JwtTokenUtils {
      */
     public static boolean verifyToken(String token) {
         try {
+            if (token.contains(KEY_TOKEN_PREFIX)) {
+                token = token.substring(7);
+            }
             Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
             JWTVerifier verifier = JWT.require(algorithm).build();
             DecodedJWT jwt = verifier.verify(token);
@@ -108,7 +112,7 @@ public class JwtTokenUtils {
             String number = map.get(KEY_CURRENT_NUMBER).asString();
             return createToken(code, name, number);
         }catch (Exception e){
-            log.info("token刷新数百");
+            log.info("token刷新失败");
             throw new RuntimeException("token don't refresh");
         }
     }

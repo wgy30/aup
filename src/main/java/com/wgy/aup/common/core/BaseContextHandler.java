@@ -12,7 +12,7 @@ import java.util.Map;
 public class BaseContextHandler {
     private static final ThreadLocal<Map<String, Object>> threadLocal = new ThreadLocal<Map<String, Object>>();
 
-    private static void set(String key, Object value) {
+    public static void set(String key, Object value) {
         Map<String, Object> map = threadLocal.get();
         if (map == null) {
             map = new HashMap<>();
@@ -21,7 +21,7 @@ public class BaseContextHandler {
         map.put(key, value);
     }
 
-    private static Object get(String key) {
+    public static Object get(String key) {
         Map<String, Object> map = threadLocal.get();
         if (map == null) {
             map = new HashMap<>();
@@ -52,7 +52,7 @@ public class BaseContextHandler {
     /**
      * 获取当前编码
      */
-    public static Object getCurrentCode(){
+    public static String getCurrentCode(){
         Object value = get(Constants.KEY_CURRENT_CODE);
         return returnObjectValue(value);
     }
@@ -61,7 +61,7 @@ public class BaseContextHandler {
      * 获取当前token
      * @return
      */
-    public static Object getToken(){
+    public static String getToken(){
         Object value = get(Constants.KEY_TOKEN_PREFIX);
         return returnObjectValue(value);
     }
@@ -69,7 +69,7 @@ public class BaseContextHandler {
     /**
      * 获取工号/学号
      */
-    public static Object getCurrentNumber(){
+    public static String getCurrentNumber(){
         Object value = get(Constants.KEY_CURRENT_NUMBER);
         return returnObjectValue(value);
     }
@@ -78,12 +78,12 @@ public class BaseContextHandler {
      * 获取当前用户名
      * @return
      */
-    public static Object getCurrentName(){
+    public static String getCurrentName(){
         Object value = get(Constants.KEY_CURRENT_NAME);
         return returnObjectValue(value);
     }
 
-    private static Object returnObjectValue(Object value) {
+    private static String returnObjectValue(Object value) {
         return value == null? null:value.toString();
     }
 

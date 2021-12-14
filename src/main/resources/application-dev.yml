@@ -12,3 +12,14 @@ spring:
 mybatis:
   type-aliases-package: com.wgy.aup.model.dto
   mapper-locations: classpath:mapper/*
+
+# actuator监控
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        exclude: "*"
+  endpoint:
+    shutdown:
+      enabled: true

@@ -89,7 +89,7 @@
                 `name = `#{`name`},
             </if>
             <if test="parentId != null'">
-                parent_id =  #{parentId},
+                parent_id = #{parentId},
             </if>
             <if test="iconUrl != null'">
                 icon_url = #{iconUrl},
@@ -101,7 +101,7 @@
                 `level` = #{level},
             </if>
             <if test="isDeleted != null">
-                 id_deleted = #{isDeleted},
+                id_deleted = #{isDeleted},
             </if>
             <if test="sort">
                 sort = #{sort},
@@ -124,7 +124,8 @@
                sort,
                link_url
         from base_menu
-        where id = #{id,jdbcType=BIGINT} and id_deleted = 0
+        where id = #{id,jdbcType=BIGINT}
+          and id_deleted = 0
     </select>
     <select id="selectAll" resultMap="BaseResultMap">
         select id,
@@ -138,5 +139,14 @@
                sort,
                link_url
         from base_menu and is_deleted = 0
+    </select>
+    <select id="selectByCodes" resultMap="BaseResultMap">
+        select * from base_menu
+        <where>
+            is_deleted = 0
+            <if test="code != null">
+                and code = #{code}
+            </if>
+        </where>
     </select>
 </mapper>

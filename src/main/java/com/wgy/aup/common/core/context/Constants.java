@@ -17,4 +17,8 @@ public class Constants {
 
     public static final String TOKEN_SECRET = "jdHDlejJkepasd!|sd|Asd1-";
 
+    /**
+     * token刷新
+     */
+    public static final String TOKEN_REFRESH = "refresh_token";
 }
