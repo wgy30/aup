@@ -31,9 +31,8 @@ public class ObjectResponse<T> extends BaseResponse {
     }
 
     public ObjectResponse<T> fail(Integer code, String message) {
-        ObjectResponse<T> response = new ObjectResponse<>();
-        response.setCode(code);
-        response.setMessage(message);
+        this.setCode(code);
+        this.setMessage(message);
         return this;
     }
 
